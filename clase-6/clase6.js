@@ -18,12 +18,25 @@ const iv = crypto.randomBytes(16)
 
 const encriptar = (password) => {
     const cipher = crypto.createCipheriv(algoritmo, Buffer.from(key), iv) //La key debe seguirse manejando como un Buffer, por eso se utiliza Buffer.from()
-    let resultado = cipher.update(password) //Preparar el objeto para encriptar
-    console.log(`El resultado de update es: ${resultado}`)
+    cipher.update(password) //Preparar el objeto para encriptar
     let encriptacion = cipher.final() //Resultado de la encriptacion
-    console.log(encriptacion.toString('hex'))
-
+    return {
+        iv: iv.toString('hex'), passwordEncriptado: encriptacion.toString('hex')
+    }
 }
 
-const password = "C0derHouse"
-encriptar(password)
+const hackerman = (passwordE) => {
+//Tomo los valores del objeto
+    const initV= Buffer.from(passwordE.iv, 'hex')
+    const password = Buffer.from(passwordE.passwordEncriptado, 'hex')
+    //Creo un objeto para desenscriptar la contraseña
+    const decipher = crypto.createDecipheriv(algoritmo, Buffer.from(key), initV)
+    //Prepara el objeto para desencriptar
+    decipher.update(password)
+    let desenscriptado = decipher.final() //Guardo el resultado
+    return desenscriptado.toString() //Lo retorno en formato string
+}
+
+const password = "Buenas Noches"
+const passwordEncriptado = encriptar(password)
+hackerman(passwordEncriptado)
