@@ -10,7 +10,7 @@ server.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 })
 */
-
+//import {ProductManager} from 'ruta'
 import express from 'express'
 
 const app = express() //app es igual a la ejecucion de express
@@ -46,7 +46,7 @@ app.get('/', (req,res) => {
 //http://localhost:4000/user?cargo=Tutor&nombre=Kevin
 app.get('/user', (req,res) => {
     let {cargo, nombre, sueldo} = req.query
-    console.log(sueldo)
+    //console.log(sueldo) undefined por que no existe el query
     const usuarios = users.filter(user => user.cargo === cargo)
     res.send(JSON.stringify(usuarios))
     //let {limite} = req.query
@@ -54,7 +54,7 @@ app.get('/user', (req,res) => {
     //const copiaProductos = arrayProductos.slice(0, limite)
 })
 
-app.get('/user/:idUser', (req,res) => {
+app.get('/user/:idUser', async (req,res) => {
     const idUser = req.params.idUser
     const user = users.find(user => user.id === parseInt(idUser))
     if(user) {

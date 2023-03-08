@@ -122,4 +122,3 @@ class Empleado {
 const empleado1 = new Empleado("Pedro", "Parker", 20, 12000)
 const empleado2 = new Empleado("Pedro", "Parker", 20, 12000)
 //empleado1.sueldo = 10  Crea una nueva propiedad con este valor
-console.log(empleado1.consultarSueldo)

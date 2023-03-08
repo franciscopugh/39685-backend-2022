@@ -66,3 +66,14 @@ export class Senior extends Empleado {
     }
     
 }
+
+
+function sumar(num1,num2) {
+    console.log(num1 + num2)
+}
+
+const sumar = function(num1,num2) {
+    console.log(num1 + num2)
+}
+
+const sumar = (num1, num2) => console.log(num1 + num2)
