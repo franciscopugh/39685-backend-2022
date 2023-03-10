@@ -1,29 +1,28 @@
-import 'dotenv/config'
-import express from 'express'
-import socket from 'socket.io'
-import { getManagerMessages } from './dao/daoManager'
+import "dotenv/config"
+import express from "express";
+import { Server } from "socket.io";
+import { getManagerMessages } from "./dao/daoManager.js";
 
 const app = express()
-const managerMessage = new getManagerMessages()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.set("port", process.env.PORT || 8080)
+app.set("port", process.env.PORT || 5000)
 
-const server = app.listen(app.get("port", () => console.log(`Server on port ${app.get("port")}`)))
+const server = app.listen(app.get("port"), () => console.log(`Server on port ${app.get("port")}`))
 
-const io = socket(server)
+const io = new Server(server)
 
-io.on("connection", (socket) => {
-    socket.on("message", (info) => {
+io.on("connection", async (socket) => {
+    socket.on("message", async (info) => {
+        const data = await getManagerMessages()
+        const managerMessage = new data.ManagerMessageMongoDB
         managerMessage.addElements([info]).then(() => {
             managerMessage.getElements().then((mensajes) => {
                 console.log(mensajes)
-                socket.emit("allMessages", mensajes)
+                socket.emmit("allMessages", mensajes)
             })
-
         })
-
     })
 })
