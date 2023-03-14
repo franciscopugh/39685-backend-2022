@@ -14,15 +14,19 @@ const server = app.listen(app.get("port"), () => console.log(`Server on port ${a
 
 const io = new Server(server)
 
+const claseDao = async (info) => {
+    const data = await getManagerMessages()
+    const managerMessage = new data.ManagerMessageMongoDB
+    await managerMessage.addElements([info])
+    const mensajes = await managerMessage.getElements()
+    return mensajes
+}
+
 io.on("connection", async (socket) => {
     socket.on("message", async (info) => {
-        const data = await getManagerMessages()
-        const managerMessage = new data.ManagerMessageMongoDB
-        managerMessage.addElements([info]).then(() => {
-            managerMessage.getElements().then((mensajes) => {
-                console.log(mensajes)
-                socket.emmit("allMessages", mensajes)
-            })
+        claseDao(info).then(mensajes => {
+            console.log(mensajes)
+            socket.emmit("allMessages", mensajes)
         })
     })
 })
