@@ -3,11 +3,13 @@ import express from 'express'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import multer from 'multer'
+import MongoStore from 'connect-mongo'
+import passport from 'passport'
 import { engine } from 'express-handlebars'
 import { __dirname } from './path.js'
 import * as path from 'path'
 import router from './routes/index.routes.js'
-import MongoStore from 'connect-mongo'
+import initializePassport from './config/passport.js'
 
 const app = express()
 
@@ -24,6 +26,11 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }))
+
+//Passport
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.engine("handlebars", engine())
 app.set("view engine", "handlebars")
