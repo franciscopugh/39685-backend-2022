@@ -1,9 +1,12 @@
 {
-  "name": "clase-35",
+  "name": "clase-36",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "engines": {
+    "node": "18.16.0"
+  },
   "scripts": {
     "dev": "nodemon src/index.js"
   },
