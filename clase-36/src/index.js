@@ -53,3 +53,9 @@ if (cluster.isPrimary) {
     app.listen(4000, () => console.log("Server on port 4000"))
     //cluster.fork() No puedo generar un subproceso a traves de un subproceso
 }
+
+export const isTokenExpired = (passwordData) => {
+    const elapsedTime = Date.now() - passwordData.timestamp //Tiempo desde que se realizo la peticion del cambio de contraseñ
+    const expirationTime = 60 * 60 * 1000 //Una hora
+    return elapsedTime >= expirationTime //Si es V, expiro el token. Si es falso, no
+}
