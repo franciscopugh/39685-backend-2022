@@ -1,0 +1,75 @@
+paths:
+  /api/users/:
+    get:
+      summary: "Consulta todos los usuarios"
+      tags:
+        - Users
+      responses:
+        "200":
+          description: "Usuarios encontrados"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/User"
+        "500":
+          description: "Error del servidor al obtener los usuarios"
+  /api/users/{uid}:
+    get:  
+      summary: "Consultar un usuario dado su id"
+      tags:
+        - Users
+      parameters:
+      - name: uid
+        in: path
+        required: true
+        description: "Id del usuario solicitado"
+        schema: 
+          $type: String
+      
+      responses:
+        "200":
+          description: "Usuario encontrado"
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/User"
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: "Id autogenerado"
+        first_name:
+          type: String
+          description: "Nombre del Usuario"
+        last_name:
+          type: String
+          description: "Apellido del Usuario"
+        email:
+          type: String
+          description: "Email del Usuario"
+        password:
+          type: String
+          description: "Contraseña del Usuario"
+        role:
+          type: String
+          description: "Rol del Usuario"
+        pets:
+          type: Array
+          description: "Mascotas del Usuario"
+      example:
+        _id: ObjectId("12bb12bb12bb12bb12bb12bb")
+        first_name: "Christopher"
+        last_name: "Cisneros"
+        email: chris@chris.com
+        password: "1hda1fe1as1"
+        role: "User"
+        pets: [ObjectId("13bb13bb13bb13bb13bb13bb")]
+
+
+
