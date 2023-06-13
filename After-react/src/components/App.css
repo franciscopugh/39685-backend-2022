@@ -1,0 +1,44 @@
+.divInicial {
+    background-color: aqua;
+}
+
+.cardBody {
+    background-color: white;
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.cardBodyDark {
+    background-color: hsl(0, 0%, 33%);
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.itemDetail {
+    max-width: 740px;
+    margin-top: 10px;
+}
+
+.cardCart {
+    max-width: 640px;
+}
+
+.cantCarrito {
+    position: relative;
+    left: 15%;
+}
+
+.cartContainer {
+    margin-top: 3%;
+
+}
+
+
+.divForm {
+    margin-top: 20px;
+}
+
+.darkMode {
+    background-color: black;
+    color: gainsboro;
+}
