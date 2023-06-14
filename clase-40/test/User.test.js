@@ -4,7 +4,7 @@ import Assert from 'assert'
 
 const assert = Assert.strict
 
-await mongoose.connect(process.env.MONGO_URL)
+await mongoose.connect()
 
 describe("Test de consulta a todos los usuarios", () => {
     //Previo a arrancar todos los test

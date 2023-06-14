@@ -11,7 +11,7 @@ import sessionsRouter from './routes/sessions.router.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-await mongoose.connect(process.env.MONGO_URL)
+await mongoose.connect()
 
 const swaggerOptions = {
     definition: {
